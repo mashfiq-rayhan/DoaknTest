@@ -1,0 +1,168 @@
+.MainDiv {
+    width: 100%;
+}
+
+.HeaderDiv {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    height: 80px;
+    text-align: left;
+}
+
+
+.h1 {
+    margin: 0;
+    font-size: 25px;
+    padding: 16px 0 0 16px;
+    
+}
+
+.p {
+    margin: 0;
+    font-size: 15px;
+    padding: 8px 0 0 18px;
+    color: grey;
+}
+
+.Cross {
+    float: right;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.hr {
+    border: 1.5px solid #900C3F;
+    background-color: #900C3F;
+}
+
+.FormDiv {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    
+}
+
+.InputName {
+    box-sizing: border-box;
+    border: 1px solid #900C3F;
+    border-radius: 20px;
+    height: 25px;
+    width: 43%;
+    padding: 20px 0; 
+    margin: 15px 0 0 22px;
+    font-size: 15px;
+    color: #F60F56;
+    font-weight: lighter;
+    text-align: center;
+    background-color: rgba(246, 15, 86, 0.1);
+    outline: none;
+}
+ 
+
+.InputInfo {
+    box-sizing: border-box;
+    border: 1px solid #900C3F;
+    border-radius: 20px;
+    height: 25px;
+    width: 90%;
+    padding: 20px 0; 
+    margin: 10px 0 0 22px;
+    font-size: 15px;
+    color: #F60F56;
+    font-weight: lighter;
+    text-align: center;
+    background-color: rgba(246, 15, 86, 0.1);
+    text-decoration: none;
+    outline: none;
+}
+.InputInfo::-webkit-outer-spin-button,
+.InputInfo::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.InputInfo[type=number] {
+    -moz-appearance: textfield;
+  }
+
+
+.BoldTag {
+    margin: 15px 0 0 25px;
+    font-size: 20px;
+    font-weight: bold;
+    display: block;
+    width: 100%;
+}
+
+.GenderOptions {
+    box-sizing: border-box;
+    border: 1px solid #900C3F;
+    border-radius: 20px;
+    height: 30px;
+    width: 27%;
+    padding: 4px; 
+    margin: 10px 0 0 22px;
+    font-size: 18px;
+    color: rgb(63, 63, 63);
+    font-weight: lighter;
+    background-color: rgba(246, 15, 86, 0.1);
+    display: inline-block;
+    justify-content: space-between;
+    cursor: pointer;
+    /* text-align: center; */
+}
+
+.GenderOption {
+    width: 40px;
+    padding: 4px 20px 0px 4px;
+}
+
+.GenderOptionSelect {
+    width: 20%;
+}
+
+.InputBirthday {
+    box-sizing: border-box;
+    border: 1px solid #900C3F;
+    border-radius: 20px;
+    height: 40px;
+    width: 90%;
+    padding: 10px 15px 10px 60px; 
+    margin: 10px 0 0 20px;
+    font-size: 20px;
+    color: grey;
+    font-weight: lighter;
+    text-align: center;
+    background-color: rgba(246, 15, 86, 0.1);
+    text-decoration: none;
+    outline: none;
+}
+
+.Agreement {
+    font-size: 10px;
+    margin: 25px 25px 0px 25px;
+}
+
+.Agreement span {
+    color: #900C3F;
+}
+
+.SignupButton {
+    box-sizing: border-box;
+    border: 2px solid #900C3F;
+    border-radius: 25px;
+    box-shadow: 0 4px 8px 0 rgba(246, 15, 86, 0.2), 0 6px 20px 0 rgba(246, 15, 86, 0.19);
+    width: 250px;
+    padding: 10px 32px;
+    margin: 10px 120px;
+    font-size: 25px;
+    text-align: center;
+    text-decoration: none;
+    background-color: #F60F56;
+    color: white;
+    cursor: pointer;
+    outline: none;
+}

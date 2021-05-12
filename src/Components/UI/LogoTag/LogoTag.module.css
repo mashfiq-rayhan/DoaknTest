@@ -1,0 +1,36 @@
+.LogoTag {
+    display: flex;
+    flex-direction: row;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    align-content: space-around;
+    box-sizing: border-box;
+    height: 400px;
+    width: 50%;
+    margin: 150px 0px 0px 0px;
+}
+
+.Logo {
+    width: 170px;
+    height: 200px;
+}
+
+.DokanName {
+    display: inline-block;
+    color: #900C3F;
+    text-shadow: -1px 0 #F60F56, 0 1px #F60F56, 1px 0 #F60F56, 0 -1px #F60F56;
+    margin: 5px 0px 0px 55px;
+    text-align: inherit;
+    font-size: 70px;
+    font-weight: 900;
+    letter-spacing: 25px;
+}
+
+.DokanMotto {
+    color: #F60F56;
+    display: block;
+    width: 70%;
+    margin: -30px 0px 0px 100px;
+    font-size: 32px;
+}

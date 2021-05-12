@@ -1,0 +1,63 @@
+
+/* .InputElement:focus {
+    outline: none;
+    background-color: #ccc;
+} */
+
+.Invalid {
+    border: 1px solid red;
+    background-color: #FDA49A;
+}
+
+
+.InputInfo {
+    box-sizing: border-box;
+    border: 1px solid #900C3F;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px 0 rgba(246, 15, 86, 0.2), 0 6px 20px 0 rgba(246, 15, 86, 0.19);
+    height: 30px;
+    width: 550px;
+    padding: 40px 40px;
+    margin: 10px;
+    font-size: 30px;
+    color: #F60F56;
+    font-weight: lighter;
+    outline: none;
+    
+}
+
+.InputName {
+    box-sizing: border-box;
+    border: 1px solid #900C3F;
+    border-radius: 20px;
+    height: 25px;
+    width: 43%;
+    padding: 20px 0; 
+    margin: 15px 0 0 22px;
+    font-size: 15px;
+    color: #F60F56;
+    font-weight: lighter;
+    text-align: center;
+    background-color: rgba(246, 15, 86, 0.1);
+    outline: none;
+}
+
+.InputInfos {
+    box-sizing: border-box;
+    border: 1px solid #900C3F;
+    border-radius: 20px;
+    height: 25px;
+    width: 90%;
+    padding: 20px 0; 
+    margin: 10px 0 0 22px;
+    font-size: 15px;
+    color: #F60F56;
+    font-weight: lighter;
+    text-align: center;
+    background-color: rgba(246, 15, 86, 0.1);
+    text-decoration: none;
+    outline: none;
+}
+
+
+
