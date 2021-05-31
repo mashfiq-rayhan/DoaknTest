@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!------- FONT AWESOME -------->
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"
+      integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu"
+      crossorigin="anonymous"
+    />
+
+    <!------- BOOTSTRAP -------->
+    <link
+      rel="stylesheet"
+      href="/bower_components/bootstrap/dist/css/bootstrap.css"
+    />
+
+    <!------- Custome CSS -------->
+    <link rel="stylesheet" href="custom_components/css/todoList.css" />
+
+    <title>ToDo | <%= title %></title>
+  </head>
+  <body class="">
+    <!----------------------------------------------------- TOP NAVIGATION ----------------------------------------------->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-5">
+        <a class="navbar-brand" href="/"><h4>DOKAN</h4></a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a class="nav-item nav-link <% if (title == "Home") { %> active  <% } %>" href="/" >Home</a>
+            <% if (user) { %>
+                <a class="nav-item nav-link <% if (title == "DashBoard") { %> active  <% } %>" href="/dashboard" >Welcome , <%= user.name %> </a>
+                <a class="nav-item nav-link <% if (title == "Orders") { %> active  <% } %>" href="/logout">Orders</a>
+                <a class="nav-item nav-link <% if (title == "Logout") { %> active  <% } %>" href="/logout">Logout</a>
+            <% } else { %>
+              <a class="nav-item nav-link <% if (title == "About") { %> active  <% } %>" href="/about" >About</a>
+              <div class="nav-item dropdown dropleft">
+              <a class="nav-link  dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">SignUp</a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item <% if (title == "SignUp") { %> active  <% } %>" href="/signup?value=customer">Customer Signup</a>
+                <a class="dropdown-item <% if (title == "SignUp") { %> active  <% } %>" href="/signup?value=seller">Seller Signup</a>
+                <a class="dropdown-item <% if (title == "SignUp") { %> active  <% } %>" href="/signup?value=delivery">Delivery Signup</a>
+              </div>
+            </div>
+              <a class="nav-item nav-link <% if (title == "Login") { %> active  <% } %>" href="/login">Login</a>
+            <% } %>
+          </div>
+        </div>
+      </nav>
+      <!------------------------------------------------TOP NAVIGATION END---------------------------------------------------------->
+      <div class="container-fluid">
+        <!----------------------------------------------- Rendering PAGE ----------------------------------------------->
+          <%- body %>
+        <!----------------------------------------------RENDERING PAGE END------------------------------------------------------>
+          <footer>
+            <label for="copyRighht"> copyRight &copy; 2021 DOKAN </label>
+
+            <script src="custom_components/js/signup.js"></script>
+            <script src="/bower_components/jquery/dist/jquery.js"></script>
+            <script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+          </footer>
+      </div>
+  </body>
+</html>
