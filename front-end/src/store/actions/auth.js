@@ -63,7 +63,7 @@ export const authSignup = (
       gender: gender,
       birthday: birthday,
     };
-    const url = ":3000/signup";
+    const url = "http://localhost:5000/signup";
     axios
       .post(url, authData)
       .then((response) => {
@@ -95,7 +95,7 @@ export const authLogin = (email, password) => {
       returnSecureToken: true,
     };
 
-    const url = "http://localhost:3000/login";
+    const url = "http://localhost:5000/login";
 
     axios
       .post(url, authData)
