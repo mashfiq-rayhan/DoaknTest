@@ -4,6 +4,9 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import { ThemeProvider } from '@material-ui/core/styles';
+import theme from './themes/theme';
+
 import { BrowserRouter } from 'react-router-dom';
 
 import { Provider } from 'react-redux';
@@ -34,7 +37,9 @@ const app = (
 
 ReactDOM.render(
   <React.StrictMode>
-    {app}
+    <ThemeProvider theme={theme}>
+      {app}
+    </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
