@@ -16,7 +16,8 @@ module.exports.addUser = async function (
       status,
       personid,
     });
-    return user;
+    if (user) return user;
+    else throw Error("Custome error : Error at model/Users.create");
   } catch (error) {
     throw Error(error);
   }
@@ -37,8 +38,13 @@ module.exports.login = async function (email, password) {
   if (user) {
     const auth = await bcrypt.compare(password, user.password);
     if (auth) {
-      return user;
+      const authUser = {
+        id: user._id,
+        aultid: user.aultid,
+        email: user.email,
+        status: user.status,
+      };
+      return authUser;
     } else throw Error("incorrect Password");
   } else throw Error("incorrect Email");
 };
-

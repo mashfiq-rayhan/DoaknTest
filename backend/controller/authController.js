@@ -57,33 +57,48 @@ module.exports.userSignup = async (req, res) => {
     dokanName = "",
     address = "",
   } = req.body;
-
+  var newPerson;
   try {
     // Create Person
     var tempDokan = [];
-      const newPerson = await Person.addPerson(
-      firstName,
-      lastName,
-      birthday,
-      gender,
-      Number(phoneNumber),
-      tempDokan,
-      address="address",
-      nid
-    );
-    console.log("resond sent 2")
-    const token = createJWT(newPerson._id);
-    res.status(200).json({
-      userId: newPerson._id,
-      userName: newPerson.firstName,
-      tokenId: token,
-    });
-    console.log("resond sent 2")
+    try {
+      newPerson = await Person.addPerson(
+        firstName,
+        lastName,
+        birthday,
+        gender,
+        Number(phoneNumber),
+        tempDokan,
+        (address = "address"),
+        nid
+      );
+    } catch (error) {
+      throw Error(error);
+    }
+    try {
+      const newUser = await User.addUser(
+        email,
+        password,
+        Number(phoneNumber),
+        status,
+        newPerson._id
+      );
+      if (newUser) {
+        const token = createJWT(newPerson._id);
+        res.status(200).json({
+          userId: newUser._id,
+          email: newUser.email,
+          userName: newPerson.firstName,
+          tokenId: token,
+        });
+      }
+    } catch (error) {
+      throw Error(error);
+    }
   } catch (error) {
     console.log(error);
     const errors = errorHandler(error);
-    console.log(errors);
-    res.status(400).json({ errors });
+    res.status(400).json({ error });
   }
 };
 
@@ -91,10 +106,23 @@ module.exports.userLogin = async (req, res) => {
   console.log(req.body);
   const { email, password } = req.body;
   console.log(email, password);
+  try {
+    const user = await User.login(email, password);
+    if (user) {
+      // Create JWT token
+      const token = createJWT(user._id);
 
-  // ** Check For user
-
-  // ** authenticate User
-
-  res.json({ userId: email, tokedId: password });
+      // set cookie
+      res.cookie("jwt", token, cookieRule(2));
+      // send id , name
+      res
+        .status(200)
+        .json({ message: "User Found and Logind in", user: user.id });
+    }
+  } catch (err) {
+    console.log(err);
+    const errors = errorHandler(err);
+    console.log(errors);
+    res.status(400).json({ errors });
+  }
 };
