@@ -1,6 +1,3 @@
-node_modules
-Dokanworkspace.code-workspace
+/node_modules
+/trash
 .jshintrc
-.bowerrc
-bower_components
-TEST.js
