@@ -21,6 +21,7 @@ const personSchema = new mongoose.Schema({
   contact: {
     type: Number,
     required: [true, "Enter Your Contact Number"],
+    unique: true,
   },
   dokan: {
     type: [Dokan],

@@ -24,7 +24,7 @@ module.exports.addPerson = async function (
     if (person) return person;
     else throw Error("Custome error : Error at model/Person.create");
   } catch (error) {
-    throw Error(error);
+    throw error;
   }
 };
 
@@ -36,4 +36,17 @@ module.exports.getPerson = async function (id) {
     else return null;
   }
   return null;
+};
+
+module.exports.deleteById = async function (id) {
+  Person.deleteOne({ _id: id }, function (error) {
+    if (error) {
+      return {
+        result: false,
+        message: `something went wrong at model/persons/deleteById with the following error ${error}`,
+      };
+    } else {
+      return { result: true, message: ` Successfully deleted ${id} ` };
+    }
+  });
 };

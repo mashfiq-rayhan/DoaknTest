@@ -19,7 +19,7 @@ module.exports.addUser = async function (
     if (user) return user;
     else throw Error("Custome error : Error at model/Users.create");
   } catch (error) {
-    throw Error(error);
+    throw error;
   }
 };
 

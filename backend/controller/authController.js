@@ -12,8 +12,18 @@ function createJWT(id) {
 }
 
 function errorHandler(err) {
-  let errors = { email: "", password: "" };
+  let errors = { email: "", password: "", contact: "" };
 
+  // Duplicate error
+
+  if (err.code === 11000) {
+    if (err.keyValue.email)
+      errors.email = "Email Already Exists , Please enter another Email";
+    if (err.keyValue.contact)
+      errors.contact =
+        "This Number is already Registered , Please try another Number";
+    return errors;
+  }
   //Incorrect Email
   if (err.message === "incorrect Email") {
     errors.email = "Email Address Dosen't Exists";
@@ -23,18 +33,13 @@ function errorHandler(err) {
   if (err.message === "incorrect Password") {
     errors.password = "Incorrect Password , Please try Again";
   }
-  // Duplicate error
-
-  if (err.code === 11000) {
-    errors.email = "Email Already Exists , Please enter another Email";
-    return errors;
-  }
   // Validation error
   if (err.message.includes("user validation failed")) {
     Object.values(err.errors).forEach(({ properties }) => {
       errors[properties.path] = properties.message;
     });
   }
+  console.log(err.code);
   return errors;
 }
 
@@ -73,7 +78,7 @@ module.exports.userSignup = async (req, res) => {
         nid
       );
     } catch (error) {
-      throw Error(error);
+      throw error;
     }
     try {
       const newUser = await User.addUser(
@@ -93,19 +98,18 @@ module.exports.userSignup = async (req, res) => {
         });
       }
     } catch (error) {
-      throw Error(error);
+      let result = Person.deleteById(newPerson._id);
+      throw error;
     }
   } catch (error) {
     console.log(error);
     const errors = errorHandler(error);
-    res.status(400).json({ error });
+    res.status(400).json({ errors });
   }
 };
 
 module.exports.userLogin = async (req, res) => {
-  console.log(req.body);
   const { email, password } = req.body;
-  console.log(email, password);
   try {
     const user = await User.login(email, password);
     if (user) {
