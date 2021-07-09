@@ -8,15 +8,12 @@ const requireAuth = (req, res, next) => {
   if (token) {
     jwt.verify(token, config.secretJWTtoken, (err, decodedToken) => {
       if (err) {
-        res.redirect("/login");
-        next();
+        return res.redirect("/login");
       } else {
-        console.log(decodedToken);
         next();
       }
     });
-  }
-  res.redirect("/login");
+  } else return res.redirect("/login");
 };
 
 const checkUser = (req, res, next) => {
@@ -41,8 +38,7 @@ const checkUser = (req, res, next) => {
 const requireGuest = (req, res, next) => {
   const token = req.cookies.jwt;
   if (token) {
-    res.redirect("/user");
-    next();
+    return res.redirect("/user");
   } else next();
 };
 module.exports = { requireAuth, checkUser, requireGuest };

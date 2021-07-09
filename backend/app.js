@@ -24,8 +24,8 @@ app.use(express.urlencoded({ extended: false })); // parse Json
 app.use(cookieParser()); // Cookies
 
 //view engineapp.use(expressLayouts);
-app.use(expressLayouts);
-app.set("view engine", "ejs");
+//app.use(expressLayouts);
+//app.set("view engine", "ejs");
 
 //DB(mongoose) Connect
 const dbURI = "mongodb://localhost:27017/dokan";

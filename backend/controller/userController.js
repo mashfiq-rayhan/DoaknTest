@@ -1,3 +1,3 @@
 module.exports.personalInformation = (req, res) => {
-  res.status(200).send("USER PERSONAL INFORMATION");
+  res.status(200).json("USER PERSONAL INFORMATION");
 };

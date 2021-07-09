@@ -15,7 +15,6 @@ function errorHandler(err) {
   let errors = { email: "", password: "", contact: "" };
 
   // Duplicate error
-
   if (err.code === 11000) {
     if (err.keyValue.email)
       errors.email = "Email Already Exists , Please enter another Email";
@@ -24,6 +23,7 @@ function errorHandler(err) {
         "This Number is already Registered , Please try another Number";
     return errors;
   }
+
   //Incorrect Email
   if (err.message === "incorrect Email") {
     errors.email = "Email Address Dosen't Exists";
@@ -33,20 +33,29 @@ function errorHandler(err) {
   if (err.message === "incorrect Password") {
     errors.password = "Incorrect Password , Please try Again";
   }
+
   // Validation error
+  if (err.message.includes("person validation failed")) {
+    Object.values(err.errors).forEach(({ properties }) => {
+      errors[properties.path] = properties.message;
+    });
+    return errors;
+  }
+
   if (err.message.includes("user validation failed")) {
     Object.values(err.errors).forEach(({ properties }) => {
       errors[properties.path] = properties.message;
     });
+    return errors;
   }
-  console.log(err.code);
+
   return errors;
 }
 
 // Export Modules
-module.exports.signupView = (req, res) => res.status(200).send("SignUp Page");
+module.exports.signupView = (req, res) => res.status(200).json("SignUp Page");
 
-module.exports.loginView = (req, res) => res.status(200).send("Login Page");
+module.exports.loginView = (req, res) => res.status(200).json("Login Page");
 
 module.exports.userSignup = async (req, res) => {
   let {
@@ -102,7 +111,7 @@ module.exports.userSignup = async (req, res) => {
       throw error;
     }
   } catch (error) {
-    console.log(error);
+    //console.log(error);
     const errors = errorHandler(error);
     res.status(400).json({ errors });
   }
@@ -124,9 +133,7 @@ module.exports.userLogin = async (req, res) => {
         .json({ message: "User Found and Logind in", user: user.id });
     }
   } catch (err) {
-    console.log(err);
     const errors = errorHandler(err);
-    console.log(errors);
     res.status(400).json({ errors });
   }
 };
