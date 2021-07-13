@@ -25,12 +25,16 @@ module.exports.addUser = async function (
 
 module.exports.getUser = async function (id) {
   const key = id;
-  if (key) {
-    let user = await User.findById(key);
-    if (user) return user;
-    else return null;
+  try {
+    if (key) {
+      let user = await User.findById(key);
+      if (user) return user;
+      else return null;
+    } else return null;
+  } catch (error) {
+    console.log(error);
+    return null;
   }
-  return null;
 };
 
 module.exports.login = async function (email, password) {

@@ -1,16 +1,21 @@
 // Modules
 const express = require("express");
 const mongoose = require("mongoose");
-const bodyParser = require("body-parser");
+//const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
-const expressLayouts = require("express-ejs-layouts");
 const helmet = require("helmet");
-const { requireAuth, checkUser } = require("./middleware/authMiddleware");
+const {
+  checkUser,
+  requireGuest,
+  requireAuth,
+} = require("./middleware/authMiddleware");
 
 //Routers
 const homeRouter = require("./routers/homeRouter");
 const authRouter = require("./routers/authRouter");
 const userRouter = require("./routers/userRouter");
+const dokanRouter = require("./routers/dokanRouter");
+
 //Initialize
 
 const app = express();
@@ -34,13 +39,14 @@ mongoose
     useUnifiedTopology: true,
     useNewUrlParser: true,
     useCreateIndex: true,
+    useFindAndModify: false,
   })
   .then((result) => app.listen(PORT, console.log(`Server Started on ${PORT}`)))
   .catch((err) => console.log(err));
 //Routes
-//app.get("*", requireAuth);
 app.use(checkUser);
 app.use(homeRouter);
 app.use(authRouter);
 app.use("/user", userRouter);
+app.use("/dokan", dokanRouter);
 //404

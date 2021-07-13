@@ -4,4 +4,5 @@ const userController = require("../controller/userController");
 const router = Router();
 
 router.get("/", requireAuth, userController.personalInformation);
+
 module.exports = router;

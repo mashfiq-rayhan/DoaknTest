@@ -24,10 +24,12 @@ const personSchema = new mongoose.Schema({
     unique: true,
   },
   dokan: {
-    type: [Dokan],
+    type: [mongoose.Schema.Types.ObjectId],
+    ref: "dokan",
     required: false,
     default: [],
   },
+
   address: {
     type: String,
     required: [true, "Please Enter a Address"],

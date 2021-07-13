@@ -13,7 +13,7 @@ function createJWT(id) {
 
 function errorHandler(err) {
   let errors = { email: "", password: "", contact: "" };
-
+  console.log("errorHandler Error: ", err);
   // Duplicate error
   if (err.code === 11000) {
     if (err.keyValue.email)
@@ -74,7 +74,7 @@ module.exports.userSignup = async (req, res) => {
   var newPerson;
   try {
     // Create Person
-    var tempDokan = [];
+    var tempDokan = null;
     try {
       newPerson = await Person.addPerson(
         firstName,
@@ -124,7 +124,6 @@ module.exports.userLogin = async (req, res) => {
     if (user) {
       // Create JWT token
       const token = createJWT(user._id);
-
       // set cookie
       res.cookie("jwt", token, cookieRule(2));
       // send id , name
@@ -133,6 +132,7 @@ module.exports.userLogin = async (req, res) => {
         .json({ message: "User Found and Logind in", user: user.id });
     }
   } catch (err) {
+    //console.log(err);
     const errors = errorHandler(err);
     res.status(400).json({ errors });
   }
