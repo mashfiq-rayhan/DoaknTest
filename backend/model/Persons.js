@@ -57,6 +57,7 @@ module.exports.updatePerson = async function (id, value) {
         } else {
           return {
             result: true,
+            value: updPerson,
             message: ` Successfully updated ${updPerson.firstName} `,
           };
         }

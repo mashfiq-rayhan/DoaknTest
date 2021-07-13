@@ -7,24 +7,12 @@ module.exports.dokanView = (req, res) =>
 module.exports.createDokan = async (req, res) => {
   const { userId, dokanName } = req.body;
   try {
-    const newDokan = await Dokan.createDokan(dokanName);
-    if (newDokan) {
-      try {
-        // console.log(newDokan._id);
-        let update = await Person.updatePerson(userId, { dokan: newDokan._id });
-        if (update.result) {
-          res.status(200).json({ update });
-        } else if (!update.result) {
-          let result = await Dokan.deleteDokan(newDokan._id);
-          if (result.value) res.status(400).json({ error: update });
-          else throw result;
-        }
-      } catch (error) {
-        throw error;
-      }
-    }
+    const newDokan = await Dokan.addDokan(userId, dokanName);
+    if (newDokan.result) {
+      res.status(200).json(newDokan);
+    } else res.status(400).json(newDokan);
   } catch (error) {
-    console.log(error);
-    res.status(400).json({ error: error });
+    console.log("Error at DokanController.createDokan", error);
+    res.status(400).json(newDokan);
   }
 };
