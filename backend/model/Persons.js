@@ -73,38 +73,6 @@ module.exports.updatePerson = async function (id, value) {
   }
 };
 
-// module.exports.addDokan = async function (id, name) {
-//   try {
-//     const tempPerson = await Person.findById(id);
-//     if (tempPerson) {
-//       try {
-//         //let value = mongoose.Types.ObjectId(dokan);
-//         tempPerson.dokan.push(Dokan.createDokan(name)._id);
-//         tempPerson.save();
-//         return true;
-//       } catch (error) {
-//         throw error;
-//       }
-//     } else return false;
-//   } catch (error) {
-//     console.log(error);
-//     return false;
-//   }
-// };
-
-// module.exports.deleteById = async function (id) {
-//   Person.deleteOne({ _id: id }, function (error) {
-//     if (error) {
-//       return {
-//         result: false,
-//         message: `something went wrong at model/persons/deleteById with the following error ${error}`,
-//       };
-//     } else {
-//       return { result: true, message: ` Successfully deleted ${id} ` };
-//     }
-//   });
-// };
-
 module.exports.deleteById = async function (id) {
   try {
     let result = await Person.findByIdAndDelete(id);

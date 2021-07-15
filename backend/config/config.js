@@ -13,4 +13,4 @@ const cookieRule = (hours) => {
   return { httpOnly: true, maxAge: maxAge * hours };
 };
 
-module.exports = { cookieRule, secretJWTtoken };
+module.exports = { maxAge, cookieRule, userStatus, secretJWTtoken };

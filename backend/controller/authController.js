@@ -1,6 +1,6 @@
 const User = require("../model/Users");
 const jwt = require("jsonwebtoken");
-const { cookieRule, secretJWTtoken } = require("../config/config");
+const { cookieRule, userType, secretJWTtoken } = require("../config/helper");
 const Dokan = require("../model/Dokans");
 const Person = require("../model/Persons");
 
@@ -13,7 +13,6 @@ function createJWT(id) {
 
 function errorHandler(err) {
   let errors = { email: "", password: "", contact: "" };
-  console.log("errorHandler Error: ", err);
   // Duplicate error
   if (err.code === 11000) {
     if (err.keyValue.email)
@@ -58,6 +57,7 @@ module.exports.signupView = (req, res) => res.status(200).json("SignUp Page");
 module.exports.loginView = (req, res) => res.status(200).json("Login Page");
 
 module.exports.userSignup = async (req, res) => {
+  // getting data
   let {
     firstName,
     lastName,
@@ -68,8 +68,6 @@ module.exports.userSignup = async (req, res) => {
     nid,
     gender,
     birthday,
-    dokanName = "",
-    address = "",
   } = req.body;
   var newPerson;
   try {
@@ -90,6 +88,9 @@ module.exports.userSignup = async (req, res) => {
       throw error;
     }
     try {
+      // status setup
+      status = userType(status);
+      // creat User
       const newUser = await User.addUser(
         email,
         password,
@@ -111,7 +112,7 @@ module.exports.userSignup = async (req, res) => {
       throw error;
     }
   } catch (error) {
-    //console.log(error);
+    console.log(error);
     const errors = errorHandler(error);
     res.status(400).json({ errors });
   }

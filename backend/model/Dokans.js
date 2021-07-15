@@ -20,7 +20,6 @@ module.exports.addDokan = async function (id, name) {
           dokan: newDokan._id,
         });
         if (updatedPerson) {
-          console.log(updatedPerson);
           return {
             result: true,
             userId: id,
@@ -31,7 +30,7 @@ module.exports.addDokan = async function (id, name) {
           throw {
             result: false,
             userId: id,
-            message: `something went wrong at model/dokan.addDokan.updatePerson with the following error ${updatedPerson}`,
+            message: `something went wrong at model/dokan.addDokan.updatePerson with the following error`,
           };
         }
       } catch (error) {
@@ -55,6 +54,54 @@ module.exports.addDokan = async function (id, name) {
       result: false,
       userId: id,
       message: `something went wrong at model/dokans.addDokan with the following error : ${error}`,
+    };
+  }
+};
+
+module.exports.getDokan = async (id) => {
+  const key = id;
+  try {
+    if (key) {
+      let dokan = await Dokan.findById(key);
+      if (dokan) return { found: true, value: dokan };
+      else return { found: false, value: null };
+    } else return { found: false, value: null };
+  } catch (error) {
+    console.log(error);
+    return { error: true, value: error };
+  }
+};
+
+module.exports.updateDokan = async (id, value) => {
+  try {
+    console.log(value);
+    const dokan = await Dokan.findByIdAndUpdate(id, value);
+    if (dokan) {
+      try {
+        let updatedDokan = await this.getDokan(dokan._id);
+        if (updatedDokan.found) {
+          return {
+            updated: true,
+            value: updatedDokan.value,
+          };
+        } else
+          return {
+            updated: false,
+            value: `something went wrong at model/dokans/update with the following error ${updatedDokan}`,
+          };
+      } catch (error) {
+        throw error;
+      }
+    } else
+      return {
+        updated: false,
+        value: `something went wrong at model/dokans/update with the following error `,
+      };
+  } catch (error) {
+    console.log("Error At model/Dokan.Update");
+    return {
+      updated: false,
+      value: `something went wrong at  model/dokans/update with the following error ${error}`,
     };
   }
 };
